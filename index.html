@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar Peluang Yoki</title>
+<style>
+:root{--bg:#f3f5f7;--card:#fff;--ink:#16202b;--mute:#66748a;--line:#dde3ea;--acc:#0d8a7a;--accink:#fff;--A:#0d8a7a;--B:#c58a00;--C:#7b8798;--bad:#c2410c}
+@media(prefers-color-scheme:dark){:root{--bg:#10151b;--card:#18202a;--ink:#e9eef4;--mute:#93a1b4;--line:#283342;--acc:#3ccfb8;--accink:#06201c;--A:#3ccfb8;--B:#f0b840;--C:#8d9aac;--bad:#fb923c}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:720px;margin:auto;padding:16px 14px 80px}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:6px 0 14px}
+h1{font-size:22px;margin:0;letter-spacing:-.01em}.sum{color:var(--mute);font-size:13px;margin-top:2px}
+button,select,input,textarea{font:inherit;color:inherit}
+button{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:9px 13px;cursor:pointer;font-weight:600;font-size:14px}
+button.p{background:var(--acc);color:var(--accink);border-color:var(--acc)}button.d{color:var(--bad)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+textarea{min-height:64px;resize:vertical}
+.add{display:flex;gap:8px;margin-bottom:12px}.add input{flex:1;font-size:16px;background:var(--card)}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:8px}
+.chip{white-space:nowrap;border-radius:99px;padding:7px 12px;font-size:13px}.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bar{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.c{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--C);border-radius:14px;padding:14px;margin-bottom:10px}
+.c.A{border-left-color:var(--A)}.c.B{border-left-color:var(--B)}
+.h{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.h b{font-size:17px;line-height:1.3}
+.sc{font-size:30px;font-weight:800;line-height:1;text-align:right;color:var(--C)}.A .sc{color:var(--A)}.B .sc{color:var(--B)}.sc small{display:block;font-size:11px;font-weight:600;color:var(--mute);margin-top:3px}
+.m{display:flex;gap:12px;flex-wrap:wrap;color:var(--mute);font-size:13px;margin:8px 0 2px}.m .st{color:var(--ink);font-weight:700}
+.nx{margin:8px 0 12px;font-size:14px}
+.a{display:flex;gap:8px;flex-wrap:wrap}
+.dt{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:grid;gap:10px}
+.dt label{font-size:12px;color:var(--mute);display:block;margin-bottom:3px}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cr{display:grid;grid-template-columns:1fr 110px 22px;gap:8px;align-items:center;font-size:14px}.cr input{padding:0;accent-color:var(--acc)}.cr span{text-align:right;font-weight:700}
+.calc{background:var(--bg);border-radius:10px;padding:10px 12px;font-size:14px}
+.empty{text-align:center;color:var(--mute);padding:34px 10px}
+#toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s}#toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div class="w">
+<header><div><h1>Radar Peluang</h1><div class="sum" id="sum"></div></div><div class="a"><button id="exp">Ekspor</button><button id="imp">Impor</button><input id="file" type="file" accept=".json" hidden></div></header>
+<div id="bk"></div>
+<div class="add" id="f"><input id="q" placeholder="Ketik ide bisnis, lalu Enter" aria-label="Ide bisnis baru" autocomplete="off" enterkeyhint="done"><button class="p" type="button" id="addBtn">Tambah</button></div>
+<div class="chips" id="chips"></div>
+<input id="s" placeholder="Cari…" aria-label="Cari" style="margin-bottom:12px">
+<div id="L"></div>
+</div>
+<div id="toast"></div>
+<script>
+const K='yoki_radar_v3',OLD='yoki_ai_business_radar_v1',EX='yoki_radar_lastexport';
+const ST=['Baru','Riset','Uji','Cuan','Ditolak'];
+const CR=['Ada yang butuh','Margin sehat','Mudah dimulai','Cepat diuji','Cocok dengan keahlianku'];
+const NEXT={Baru:'Cari 3 bukti ada yang butuh dan mau bayar.',Riset:'Tanya 5 calon pelanggan, bandingkan harga pesaing.',Uji:'Jual 1 unit atau buka pre-order, catat hasilnya.',Cuan:'Ulangi dan perbesar, catat omzet nyata.',Ditolak:'Arsipkan dan tulis pelajarannya.'};
+let filter='Semua',open=new Set(),items=load();
+const $=id=>document.getElementById(id);
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const url=u=>/^https?:\/\//i.test(String(u||'').trim())?String(u).trim():'';
+const rp=n=>'Rp'+new Intl.NumberFormat('id-ID').format(Math.round(n));
+function norm(o){
+ if(!o||!String(o.title||'').trim())return null;
+ const sm={'Sedang diuji':'Uji','Menghasilkan':'Cuan'},st=sm[o.status]||o.status;
+ const cr=Array.isArray(o.crit)&&o.crit.length===5?o.crit.map(v=>Math.min(5,Math.max(1,+v||3))):[3,3,3,3,3];
+ return{id:String(o.id||'').replace(/[^\w-]/g,'')||uid(),title:String(o.title).trim(),problem:String(o.problem||''),offer:String(o.offer||''),
+  price:Math.max(0,+o.price||0),unit:Math.max(0,+o.unit||0),cap:Math.max(0,+(o.cap??o.cost)||0),url:url(o.url||o.evidence),
+  crit:cr,status:ST.includes(st)?st:'Baru',created:+o.created||Date.now()}
+}
+function clean(a){const seen=new Set();return a.map(norm).filter(x=>{if(!x)return 0;while(seen.has(x.id))x.id=uid();seen.add(x.id);return 1})}
+function load(){for(const k of[K,OLD]){try{const a=JSON.parse(localStorage.getItem(k)||'null');if(Array.isArray(a)&&a.length)return clean(a)}catch(e){}}return[]}
+let warned=0;
+function save(){try{localStorage.setItem(K,JSON.stringify(items))}catch(e){if(!warned++)alert('Penyimpanan browser penuh atau diblokir. Ekspor cadangan sekarang.')}render()}
+const score=o=>Math.round(o.crit.reduce((a,b)=>a+b,0)/25*100);
+const prio=s=>s>=70?'A':s>=45?'B':'C';
+const margin=o=>o.price>0?Math.round((o.price-o.unit)/o.price*100):null;
+const bep=o=>o.price>o.unit&&o.cap>0?Math.ceil(o.cap/(o.price-o.unit)):null;
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),2200)}
+function detail(o){
+ const lk=q=>`<button data-a="web" data-u="${esc(q)}">`;
+ const t=encodeURIComponent(o.title);
+ return`<div class="dt">
+ <div><label>Masalah pelanggan</label><textarea data-f="problem" data-id="${o.id}">${esc(o.problem)}</textarea></div>
+ <div><label>Apa yang dijual dan siapa yang bayar</label><textarea data-f="offer" data-id="${o.id}">${esc(o.offer)}</textarea></div>
+ <div class="g3"><div><label>Harga jual (Rp)</label><input type="number" min="0" data-f="price" data-id="${o.id}" value="${o.price||''}"></div><div><label>Biaya per unit</label><input type="number" min="0" data-f="unit" data-id="${o.id}" value="${o.unit||''}"></div><div><label>Modal awal</label><input type="number" min="0" data-f="cap" data-id="${o.id}" value="${o.cap||''}"></div></div>
+ ${o.price>0?`<div class="calc">Untung per unit <b>${rp(o.price-o.unit)}</b> (margin ${margin(o)}%)${bep(o)?`. Modal kembali setelah terjual <b>${bep(o)}</b> unit.`:'.'}</div>`:''}
+ <div>${CR.map((c,i)=>`<div class="cr"><label style="margin:0;font-size:14px;color:var(--ink)">${c}</label><input type="range" min="1" max="5" value="${o.crit[i]}" data-f="crit" data-i="${i}" data-id="${o.id}" aria-label="${c}"><span>${o.crit[i]}</span></div>`).join('')}</div>
+ <div><label>Tautan bukti</label><input type="url" placeholder="https://" data-f="url" data-id="${o.id}" value="${esc(o.url)}"></div>
+ <div><label>Status</label><select data-f="status" data-id="${o.id}">${ST.map(s=>`<option ${s===o.status?'selected':''}>${s}</option>`).join('')}</select></div>
+ <div class="a">${o.url?`<a href="${esc(o.url)}" target="_blank" rel="noopener noreferrer"><button type="button">Buka bukti</button></a>`:''}
+ ${lk('https://www.google.com/search?q='+t+'+harga+pesaing')}Cek pesaing</button>${lk('https://trends.google.com/trends/explore?q='+t)}Tren</button>${lk('https://www.reddit.com/search/?q='+t)}Keluhan</button>
+ <button class="p" data-a="ai" data-id="${o.id}">Salin prompt AI</button><button class="d" data-a="del" data-id="${o.id}">Hapus</button></div></div>`
+}
+function card(o){
+ const s=score(o),p=prio(s),m=margin(o),i=ST.indexOf(o.status),nxt=i<3?ST[i+1]:'';
+ return`<article class="c ${p}"><div class="h"><b>${esc(o.title)}</b><div class="sc">${s}<small>Prioritas ${p}</small></div></div>
+ <div class="m"><span class="st">${o.status}</span>${m!==null?`<span>Margin ${m}%</span>`:''}${o.cap?`<span>Modal ${rp(o.cap)}</span>`:''}</div>
+ <p class="nx">${NEXT[o.status]}</p>
+ <div class="a">${nxt?`<button class="p" data-a="adv" data-id="${o.id}">Lanjut ke ${nxt}</button>`:''}<button data-a="tog" data-id="${o.id}">${open.has(o.id)?'Tutup':'Detail'}</button></div>
+ ${open.has(o.id)?detail(o):''}</article>`
+}
+function render(){
+ const q=$('s').value.toLowerCase();
+ const cnt=s=>items.filter(o=>s==='Semua'||o.status===s).length;
+ $('chips').innerHTML=['Semua',...ST].map(s=>`<button class="chip ${s===filter?'on':''}" data-a="flt" data-s="${s}">${s} ${cnt(s)}</button>`).join('');
+ const act=items.filter(o=>o.status!=='Ditolak');
+ $('sum').textContent=items.length?`${items.length} peluang, ${act.filter(o=>prio(score(o))==='A').length} prioritas A, ${cnt('Uji')} sedang diuji, ${cnt('Cuan')} menghasilkan`:'Mulai dengan satu ide.';
+ const last=+localStorage.getItem(EX)||0;
+ $('bk').innerHTML=items.length&&Date.now()-last>6048e5?`<div class="bar"><span>${last?'Sudah lebih dari 7 hari':'Belum pernah'} ekspor cadangan.</span><button class="p" data-a="exp">Ekspor</button></div>`:'';
+ const list=items.filter(o=>(filter==='Semua'||o.status===filter)&&(!q||(o.title+o.problem+o.offer).toLowerCase().includes(q))).sort((a,b)=>score(b)-score(a)||b.created-a.created);
+ $('L').innerHTML=list.length?list.map(card).join(''):`<div class="empty">${items.length?'Tidak ada yang cocok.':'Belum ada peluang. Ketik ide pertama di atas.'}</div>`;
+}
+function addIdea(){const t=$('q').value.trim();if(!t)return;items.unshift(norm({title:t,created:Date.now()}));$('q').value='';filter='Semua';save();toast('Ide ditambahkan. Tap Detail untuk menilai.')}
+$('addBtn').onclick=addIdea;$('q').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addIdea()}});
+$('s').addEventListener('input',render);
+function prompt_(o){return`Saya menimbang peluang bisnis ini di Indonesia. Tolong analisis kritis dan jujur.
+
+Ide: ${o.title}
+Masalah pelanggan: ${o.problem||'(belum diisi)'}
+Yang dijual: ${o.offer||'(belum diisi)'}
+Harga jual: ${o.price?rp(o.price):'?'}, biaya per unit: ${o.unit?rp(o.unit):'?'}, modal awal: ${o.cap?rp(o.cap):'?'}
+Skor awal saya: ${score(o)}/100
+
+Jawab ringkas: 1) apakah permintaannya nyata, apa buktinya; 2) siapa pesaing utama dan harganya; 3) unit economics dan risiko terbesar; 4) tiga tes termurah yang bisa saya lakukan dalam 7 hari; 5) saran: lanjut, ubah, atau tolak.`}
+function copy(t){return navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,o=items.find(x=>x.id===b.dataset.id);
+ if(a==='flt'){filter=b.dataset.s;render()}
+ else if(a==='tog'&&o){open.has(o.id)?open.delete(o.id):open.add(o.id);render()}
+ else if(a==='adv'&&o){o.status=ST[ST.indexOf(o.status)+1];save()}
+ else if(a==='del'&&o){if(confirm('Hapus "'+o.title+'"?')){items=items.filter(x=>x!==o);save()}}
+ else if(a==='web')window.open(b.dataset.u,'_blank','noopener');
+ else if(a==='ai'&&o){const t=prompt_(o);copy(t).then(()=>{toast('Prompt disalin. Tempel di Claude.');window.open('https://claude.ai/new','_blank','noopener')}).catch(()=>{prompt('Salin prompt ini:',t)})}
+ else if(a==='exp')exportData();
+});
+document.addEventListener('change',e=>{
+ const t=e.target,f=t.dataset.f;if(!f)return;const o=items.find(x=>x.id===t.dataset.id);if(!o)return;
+ if(f==='crit')o.crit[+t.dataset.i]=Math.min(5,Math.max(1,+t.value));
+ else if(['price','unit','cap'].includes(f))o[f]=Math.max(0,+t.value||0);
+ else if(f==='url'){o.url=url(t.value);if(t.value&&!o.url)alert('Tautan harus diawali http:// atau https://')}
+ else if(f==='status'){if(ST.includes(t.value))o.status=t.value}
+ else o[f]=t.value.trim();
+ save();
+});
+function exportData(){
+ const u=URL.createObjectURL(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),opportunities:items},null,2)],{type:'application/json'}));
+ const a=document.createElement('a');a.href=u;a.download='radar-cadangan-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(u),4000);try{localStorage.setItem(EX,Date.now())}catch(e){}render();toast('Cadangan diunduh.')
+}
+$('exp').onclick=exportData;$('imp').onclick=()=>$('file').click();
+$('file').onchange=ev=>{const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result),arr=clean(Array.isArray(d)?d:d.opportunities);if(!arr.length)throw 0;const ids=new Set(items.map(x=>x.id)),add=arr.filter(x=>!ids.has(x.id));items=[...add,...items];save();toast(add.length+' peluang diimpor.')}catch(e){alert('File JSON tidak valid.')}ev.target.value=''};r.readAsText(f)};
+render();
+</script>
+</body>
+</html>
