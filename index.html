@@ -10,143 +10,182 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 .w{max-width:720px;margin:auto;padding:16px 14px 80px}
 header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:6px 0 14px}
-h1{font-size:22px;margin:0;letter-spacing:-.01em}.sum{color:var(--mute);font-size:13px;margin-top:2px}
+h1{font-size:22px;margin:0}.sum{color:var(--mute);font-size:13px;margin-top:2px}h2{font-size:17px;margin:0 0 8px}
 button,select,input,textarea{font:inherit;color:inherit}
 button{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:9px 13px;cursor:pointer;font-weight:600;font-size:14px}
 button.p{background:var(--acc);color:var(--accink);border-color:var(--acc)}button.d{color:var(--bad)}
-button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
-textarea{min-height:64px;resize:vertical}
-.add{display:flex;gap:8px;margin-bottom:12px}.add input{flex:1;font-size:16px;background:var(--card)}
-.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin-bottom:8px}
-.chip{white-space:nowrap;border-radius:99px;padding:7px 12px;font-size:13px}.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.bar{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.c{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--C);border-radius:14px;padding:14px;margin-bottom:10px}
-.c.A{border-left-color:var(--A)}.c.B{border-left-color:var(--B)}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+input,textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+textarea{min-height:90px;resize:vertical;font-size:14px}
+.tabs{display:flex;gap:6px;margin-bottom:12px}.tab{flex:1;border-radius:99px}.tab.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.box,.c{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.c{border-left:5px solid var(--C)}.c.A{border-left-color:var(--A)}.c.B{border-left-color:var(--B)}
 .h{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.h b{font-size:17px;line-height:1.3}
 .sc{font-size:30px;font-weight:800;line-height:1;text-align:right;color:var(--C)}.A .sc{color:var(--A)}.B .sc{color:var(--B)}.sc small{display:block;font-size:11px;font-weight:600;color:var(--mute);margin-top:3px}
-.m{display:flex;gap:12px;flex-wrap:wrap;color:var(--mute);font-size:13px;margin:8px 0 2px}.m .st{color:var(--ink);font-weight:700}
-.nx{margin:8px 0 12px;font-size:14px}
-.a{display:flex;gap:8px;flex-wrap:wrap}
-.dt{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:grid;gap:10px}
-.dt label{font-size:12px;color:var(--mute);display:block;margin-bottom:3px}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.cr{display:grid;grid-template-columns:1fr 110px 22px;gap:8px;align-items:center;font-size:14px}.cr input{padding:0;accent-color:var(--acc)}.cr span{text-align:right;font-weight:700}
-.calc{background:var(--bg);border-radius:10px;padding:10px 12px;font-size:14px}
-.empty{text-align:center;color:var(--mute);padding:34px 10px}
+.m{display:flex;gap:12px;flex-wrap:wrap;color:var(--mute);font-size:13px;margin:8px 0}.m b{color:var(--ink)}
+.f{font-size:14px;margin:6px 0}.f span{color:var(--mute)}
+.a{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+details{margin:8px 0;font-size:14px}summary{cursor:pointer;font-weight:600}details p{margin:6px 0;white-space:pre-wrap}
+.pr{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:8px 0}.pr label{font-size:11px;color:var(--mute);display:block}.pr input{padding:8px 6px}
+.note{font-size:13px;color:var(--mute);margin:6px 0}.vd{background:var(--bg);border-radius:10px;padding:10px 12px;font-size:14px;margin:8px 0}
+.empty{text-align:center;color:var(--mute);padding:26px 10px}
 #toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s}#toast.on{opacity:1}
+a{color:var(--acc)}
 </style>
 </head>
 <body>
 <div class="w">
-<header><div><h1>Radar Peluang</h1><div class="sum" id="sum"></div></div><div class="a"><button id="exp">Ekspor</button><button id="imp">Impor</button><input id="file" type="file" accept=".json" hidden></div></header>
-<div id="bk"></div>
-<div class="add" id="f"><input id="q" placeholder="Ketik ide bisnis, lalu Enter" aria-label="Ide bisnis baru" autocomplete="off" enterkeyhint="done"><button class="p" type="button" id="addBtn">Tambah</button></div>
-<div class="chips" id="chips"></div>
-<input id="s" placeholder="Cari…" aria-label="Cari" style="margin-bottom:12px">
-<div id="L"></div>
+<header><div><h1>Radar Peluang</h1><div class="sum" id="sum"></div></div><div class="a" style="margin:0"><button data-a="exp">Ekspor</button><button data-a="imp">Impor</button><input id="file" type="file" accept=".json" hidden></div></header>
+<div class="tabs"><button class="tab" data-a="tab" data-t="today">Hari ini</button><button class="tab" data-a="tab" data-t="exp">Eksperimen</button></div>
+<div id="V"></div>
 </div>
 <div id="toast"></div>
 <script>
-const K='yoki_radar_v3',OLD='yoki_ai_business_radar_v1',EX='yoki_radar_lastexport';
-const ST=['Baru','Riset','Uji','Cuan','Ditolak'];
-const CR=['Ada yang butuh','Margin sehat','Mudah dimulai','Cepat diuji','Cocok dengan keahlianku'];
-const NEXT={Baru:'Cari 3 bukti ada yang butuh dan mau bayar.',Riset:'Tanya 5 calon pelanggan, bandingkan harga pesaing.',Uji:'Jual 1 unit atau buka pre-order, catat hasilnya.',Cuan:'Ulangi dan perbesar, catat omzet nyata.',Ditolak:'Arsipkan dan tulis pelajarannya.'};
-let filter='Semua',open=new Set(),items=load();
+const K='yoki_radar_v5';
 const $=id=>document.getElementById(id);
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const url=u=>/^https?:\/\//i.test(String(u||'').trim())?String(u).trim():'';
-const rp=n=>'Rp'+new Intl.NumberFormat('id-ID').format(Math.round(n));
-function norm(o){
- if(!o||!String(o.title||'').trim())return null;
- const sm={'Sedang diuji':'Uji','Menghasilkan':'Cuan'},st=sm[o.status]||o.status;
- const cr=Array.isArray(o.crit)&&o.crit.length===5?o.crit.map(v=>Math.min(5,Math.max(1,+v||3))):[3,3,3,3,3];
- return{id:String(o.id||'').replace(/[^\w-]/g,'')||uid(),title:String(o.title).trim(),problem:String(o.problem||''),offer:String(o.offer||''),
-  price:Math.max(0,+o.price||0),unit:Math.max(0,+o.unit||0),cap:Math.max(0,+(o.cap??o.cost)||0),url:url(o.url||o.evidence),
-  crit:cr,status:ST.includes(st)?st:'Baru',created:+o.created||Date.now()}
+const num=v=>Math.max(0,+v||0);
+const rp=n=>'Rp'+new Intl.NumberFormat('id-ID').format(Math.round(n||0));
+const CATS={tanpa_stok:'Tanpa stok',perdagangan:'Perdagangan',masalah:'Berbasis masalah'};
+const KR=['permintaan','margin','mudah_mulai','cepat_diuji','cocok_saya'];
+const CK='yoki_radar_cfg';let tab='today',busy=false,S=load();
+function cfg(){try{return JSON.parse(localStorage.getItem(CK)||'{}')}catch(e){return{}}}
+
+function normO(o){
+ if(!o||!String(o.judul||o.title||'').trim())return null;
+ const sk=o.skor||{},cr=KR.map(k=>Math.min(5,Math.max(1,+sk[k]||3)));
+ return{id:String(o.id||'').replace(/[^\w-]/g,'')||uid(),title:String(o.judul||o.title).trim(),cat:CATS[o.kategori]?o.kategori:(CATS[o.cat]?o.cat:'masalah'),
+  buyer:String(o.pembeli||o.buyer||''),problem:String(o.masalah||o.problem||''),model:String(o.model_pendapatan||o.model||''),
+  cap:num(o.modal_rp??o.cap),profit:num(o.estimasi_untung_rp??o.profit),risk:String(o.risiko||o.risk||''),first:String(o.langkah_pertama||o.first||''),
+  offer:String(o.contoh_penawaran||o.offer||''),sig:String(o.sinyal||o.sig||''),mean:String(o.artinya||o.mean||''),test:String(o.tes_7_hari||o.test||''),crit:Array.isArray(o.crit)&&o.crit.length===5?o.crit.map(v=>Math.min(5,Math.max(1,+v||3))):cr,
+  proof:(Array.isArray(o.bukti)?o.bukti:Array.isArray(o.proof)?o.proof:[]).map(b=>({t:String(b.judul||b.t||'Sumber'),u:url(b.url||b.u)})).filter(b=>b.u).slice(0,6),
+  state:['baru','diuji','diabaikan'].includes(o.state)?o.state:'baru'}
 }
-function clean(a){const seen=new Set();return a.map(norm).filter(x=>{if(!x)return 0;while(seen.has(x.id))x.id=uid();seen.add(x.id);return 1})}
-function load(){for(const k of[K,OLD]){try{const a=JSON.parse(localStorage.getItem(k)||'null');if(Array.isArray(a)&&a.length)return clean(a)}catch(e){}}return[]}
+function normE(e){
+ if(!e||!String(e.title||'').trim())return null;
+ return{id:String(e.id||'').replace(/[^\w-]/g,'')||uid(),title:String(e.title),buyer:String(e.buyer||''),offer:String(e.offer||''),first:String(e.first||''),
+  status:['Uji','Cuan','Ditolak'].includes(e.status)?e.status:'Uji',lesson:String(e.lesson||''),
+  log:(Array.isArray(e.log)?e.log:[]).map(l=>({d:String(l.d||''),c:num(l.c),r:num(l.r),b:num(l.b),rev:num(l.rev),cost:num(l.cost)})).slice(-200)}
+}
+function load(){try{const d=JSON.parse(localStorage.getItem(K)||'null');if(d&&Array.isArray(d.reports))return{reports:d.reports.map(r=>({date:String(r.date||''),items:(r.items||[]).map(normO).filter(Boolean)})).filter(r=>r.items.length).slice(0,14),exps:(d.exps||[]).map(normE).filter(Boolean)}}catch(e){}return{reports:[],exps:[]}}
 let warned=0;
-function save(){try{localStorage.setItem(K,JSON.stringify(items))}catch(e){if(!warned++)alert('Penyimpanan browser penuh atau diblokir. Ekspor cadangan sekarang.')}render()}
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){if(!warned++)alert('Penyimpanan browser penuh atau diblokir. Ekspor cadangan sekarang.')}render()}
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),2200)}
 const score=o=>Math.round(o.crit.reduce((a,b)=>a+b,0)/25*100);
 const prio=s=>s>=70?'A':s>=45?'B':'C';
-const margin=o=>o.price>0?Math.round((o.price-o.unit)/o.price*100):null;
-const bep=o=>o.price>o.unit&&o.cap>0?Math.ceil(o.cap/(o.price-o.unit)):null;
-function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),2200)}
-function detail(o){
- const lk=q=>`<button data-a="web" data-u="${esc(q)}">`;
- const t=encodeURIComponent(o.title);
- return`<div class="dt">
- <div><label>Masalah pelanggan</label><textarea data-f="problem" data-id="${o.id}">${esc(o.problem)}</textarea></div>
- <div><label>Apa yang dijual dan siapa yang bayar</label><textarea data-f="offer" data-id="${o.id}">${esc(o.offer)}</textarea></div>
- <div class="g3"><div><label>Harga jual (Rp)</label><input type="number" min="0" data-f="price" data-id="${o.id}" value="${o.price||''}"></div><div><label>Biaya per unit</label><input type="number" min="0" data-f="unit" data-id="${o.id}" value="${o.unit||''}"></div><div><label>Modal awal</label><input type="number" min="0" data-f="cap" data-id="${o.id}" value="${o.cap||''}"></div></div>
- ${o.price>0?`<div class="calc">Untung per unit <b>${rp(o.price-o.unit)}</b> (margin ${margin(o)}%)${bep(o)?`. Modal kembali setelah terjual <b>${bep(o)}</b> unit.`:'.'}</div>`:''}
- <div>${CR.map((c,i)=>`<div class="cr"><label style="margin:0;font-size:14px;color:var(--ink)">${c}</label><input type="range" min="1" max="5" value="${o.crit[i]}" data-f="crit" data-i="${i}" data-id="${o.id}" aria-label="${c}"><span>${o.crit[i]}</span></div>`).join('')}</div>
- <div><label>Tautan bukti</label><input type="url" placeholder="https://" data-f="url" data-id="${o.id}" value="${esc(o.url)}"></div>
- <div><label>Status</label><select data-f="status" data-id="${o.id}">${ST.map(s=>`<option ${s===o.status?'selected':''}>${s}</option>`).join('')}</select></div>
- <div class="a">${o.url?`<a href="${esc(o.url)}" target="_blank" rel="noopener noreferrer"><button type="button">Buka bukti</button></a>`:''}
- ${lk('https://www.google.com/search?q='+t+'+harga+pesaing')}Cek pesaing</button>${lk('https://trends.google.com/trends/explore?q='+t)}Tren</button>${lk('https://www.reddit.com/search/?q='+t)}Keluhan</button>
- <button class="p" data-a="ai" data-id="${o.id}">Salin prompt AI</button><button class="d" data-a="del" data-id="${o.id}">Hapus</button></div></div>`
+const tot=e=>e.log.reduce((a,l)=>({c:a.c+l.c,r:a.r+l.r,b:a.b+l.b,rev:a.rev+l.rev,cost:a.cost+l.cost}),{c:0,r:0,b:0,rev:0,cost:0});
+function verdict(t){
+ if(t.b>0&&t.rev>t.cost)return'Ada yang membeli dan sudah untung. Layak dilanjutkan dan diperbesar.';
+ if(t.b>0)return'Sudah ada pembeli tapi belum untung. Periksa harga dan biaya.';
+ if(t.c<10)return'Data belum cukup. Hubungi sampai minimal 20 calon pelanggan.';
+ if(t.r===0)return'Belum ada yang membalas. Ubah target pelanggan atau kalimat penawaran.';
+ return'Ada yang membalas tapi belum membeli. Tinjau harga, bukti, atau tawarkan uji coba kecil.'
 }
-function card(o){
- const s=score(o),p=prio(s),m=margin(o),i=ST.indexOf(o.status),nxt=i<3?ST[i+1]:'';
+function copy(t,msg){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast(msg)).catch(()=>prompt('Salin teks ini:',t))}
+
+function makePrompt(){const d=new Date().toISOString().slice(0,10);return`Hari ini ${d}. Kamu analis radar peluang bisnis saya. Gunakan pencarian web dan temukan TEPAT 3 peluang bisnis dari berita atau data terbaru.
+Konteks saya: tinggal di Yogyakarta, pengalaman 20+ tahun di perdagangan dan ekspor, bekerja dari HP, modal kecil, lebih suka tanpa stok.
+Satu peluang per kategori: tanpa_stok (jasa digital/riset/keahlian), perdagangan (produk, pembeli internasional, produk Indonesia), masalah (kebutuhan yang belum terlayani).
+Aturan ketat: buang artikel tren generik seperti "tren bisnis 2026". Pakai hanya berita atau data bertanggal dalam sekitar 60 hari terakhir yang punya pemicu jelas (aturan baru, perjanjian, tenggat, peluncuran, perubahan harga). Cantumkan hanya URL yang benar-benar kamu temukan. Jika sumber saling bertentangan atau bukti lemah, tulis jujur di "risiko". Jangan mengarang angka; tandai perkiraan sebagai asumsi. Utamakan sinyal yang masih dini, bukan yang sudah ramai.
+Balas HANYA JSON valid tanpa teks lain, format:
+{"tanggal":"YYYY-MM-DD","peluang":[{"judul":"","kategori":"tanpa_stok|perdagangan|masalah","sinyal":"apa yang terjadi, kapan, angka kunci","artinya":"kenapa ini peluang untuk saya","pembeli":"siapa yang membayar","model_pendapatan":"","modal_rp":0,"estimasi_untung_rp":0,"risiko":"","bukti":[{"judul":"","url":""}],"tes_7_hari":"tes termurah dalam 7 hari","contoh_penawaran":"pesan siap kirim dalam bahasa Indonesia","skor":{"permintaan":1,"margin":1,"mudah_mulai":1,"cepat_diuji":1,"cocok_saya":1}}]}
+Skor 1-5 per faktor berdasarkan bukti. estimasi_untung_rp adalah perkiraan per bulan.`}
+
+function parseReport(t){
+ t=t.replace(/```(?:json)?/gi,'');const a=t.search(/[\[{]/),b=Math.max(t.lastIndexOf('}'),t.lastIndexOf(']'));
+ if(a<0||b<a)throw 0;let d=JSON.parse(t.slice(a,b+1));if(Array.isArray(d))d={peluang:d};
+ const items=(d.peluang||[]).map(normO).filter(Boolean).slice(0,5);if(!items.length)throw 0;
+ return{date:String(d.tanggal||new Date().toISOString().slice(0,10)),items}
+}
+function evalPrompt(e){const t=tot(e);return`Saya sedang menguji peluang bisnis: ${e.title}.
+Pembeli sasaran: ${e.buyer||'-'}. Penawaran: ${e.offer||'-'}.
+Hasil sejauh ini (${e.log.length} catatan): dihubungi ${t.c}, membalas ${t.r}, membeli ${t.b}, omzet ${rp(t.rev)}, biaya ${rp(t.cost)}.
+Analisis jujur: kenapa hasilnya begini, apa satu hal yang harus saya ubah besok (target, penawaran, harga, atau cara menghubungi), dan apakah layak dilanjutkan, diubah, atau dihentikan. Jawab ringkas dengan langkah konkret.`}
+
+function oppCard(o){
+ const s=score(o),p=prio(s);
  return`<article class="c ${p}"><div class="h"><b>${esc(o.title)}</b><div class="sc">${s}<small>Prioritas ${p}</small></div></div>
- <div class="m"><span class="st">${o.status}</span>${m!==null?`<span>Margin ${m}%</span>`:''}${o.cap?`<span>Modal ${rp(o.cap)}</span>`:''}</div>
- <p class="nx">${NEXT[o.status]}</p>
- <div class="a">${nxt?`<button class="p" data-a="adv" data-id="${o.id}">Lanjut ke ${nxt}</button>`:''}<button data-a="tog" data-id="${o.id}">${open.has(o.id)?'Tutup':'Detail'}</button></div>
- ${open.has(o.id)?detail(o):''}</article>`
+ <div class="m"><span>${CATS[o.cat]}</span>${o.cap?`<span>Modal <b>${rp(o.cap)}</b></span>`:''}${o.profit?`<span>Perkiraan untung <b>${rp(o.profit)}</b>/bln</span>`:''}</div>
+ <div class="f"><span>Sinyal:</span> ${esc(o.sig||o.problem)}</div>${o.mean?`<div class="f"><span>Artinya buatmu:</span> ${esc(o.mean)}</div>`:''}
+ <div class="f"><span>Yang bayar:</span> ${esc(o.buyer)}</div><div class="f"><span>Cara dapat uang:</span> ${esc(o.model)}</div>
+ <div class="f"><span>Tes 7 hari:</span> <b>${esc(o.test||o.first)}</b></div>
+ <details><summary>Risiko dan bukti</summary><p>${esc(o.risk||'Tidak disebutkan.')}</p>${o.proof.length?o.proof.map(b=>`<p><a href="${esc(b.u)}" target="_blank" rel="noopener noreferrer">${esc(b.t)}</a></p>`).join(''):'<p>Tidak ada sumber. Anggap belum terverifikasi.</p>'}</details>
+ ${o.offer?`<details><summary>Contoh penawaran</summary><p>${esc(o.offer)}</p></details>`:''}
+ <div class="a">${o.state==='baru'?`<button class="p" data-a="try" data-id="${o.id}">Uji yang ini</button><button data-a="skip" data-id="${o.id}">Abaikan</button>`:`<span class="note">${o.state==='diuji'?'Sedang diuji (lihat tab Eksperimen)':'Diabaikan'}</span>`}${o.offer?`<button data-a="cpo" data-id="${o.id}">Salin penawaran</button>`:''}</div></article>`
+}
+function viewToday(){
+ const r=S.reports[0];
+ const c=cfg();
+ const how=`<div class="box"><button class="p" style="width:100%;padding:14px;font-size:16px" data-a="srch" ${busy?'disabled':''}>${busy?'Mencari... bisa sampai 1 menit':'Cari peluang sekarang'}</button>
+ <p class="note">${c.ep?'Mode otomatis aktif: hasil langsung masuk.':'Mode manual: prompt disalin dan Claude dibuka. Salin jawabannya, tempel di bawah.'}</p>
+ <textarea id="paste" placeholder="Mode manual: tempel jawaban JSON dari Claude di sini"></textarea><div class="a"><button class="p" data-a="imr">Impor laporan</button></div>
+ <details><summary>Pengaturan mode otomatis</summary><div class="f"><span>URL fungsi</span><input id="ep" placeholder="https://xxxx.supabase.co/functions/v1/radar-search" value="${esc(c.ep||'')}"></div><div class="f"><span>Kunci rahasia</span><input id="sk" type="password" value="${esc(c.sk||'')}"></div><div class="a"><button data-a="cfg">Simpan pengaturan</button></div></details></div>`;
+ if(!r)return how+'<div class="empty">Belum ada laporan. Ikuti dua langkah di atas.</div>';
+ return how+`<h2>Laporan ${esc(r.date)}</h2><p class="note">Bukti dari AI harus kamu cek sendiri sebelum mengeluarkan uang. Pilih satu peluang untuk diuji dulu. Sumber tertera di bagian Risiko dan bukti.</p>`+r.items.map(oppCard).join('')
+}
+function expCard(e){
+ const t=tot(e),act=e.status==='Uji',rr=t.c?Math.round(t.r/t.c*100):0;
+ return`<article class="c ${e.status==='Cuan'?'A':e.status==='Uji'?'B':''}"><div class="h"><b>${esc(e.title)}</b><span class="note">${e.status}</span></div>
+ <div class="m"><span>Dihubungi <b>${t.c}</b></span><span>Balas <b>${t.r}</b> (${rr}%)</span><span>Beli <b>${t.b}</b></span><span>Omzet <b>${rp(t.rev)}</b></span><span>Biaya <b>${rp(t.cost)}</b></span><span>Untung <b>${rp(t.rev-t.cost)}</b></span></div>
+ <div class="vd">${esc(verdict(t))}</div>
+ ${act?`<div class="pr" data-box="${e.id}">${[['c','Dihubungi'],['r','Balas'],['b','Beli'],['rev','Omzet Rp'],['cost','Biaya Rp']].map(([k,l])=>`<div><label>${l}</label><input type="number" min="0" inputmode="numeric" data-k="${k}"></div>`).join('')}</div>
+ <div class="a" style="margin-top:0"><button class="p" data-a="log" data-id="${e.id}">Catat hari ini</button><button data-a="cpe" data-id="${e.id}">Salin prompt evaluasi</button></div>
+ <div class="a"><button data-a="win" data-id="${e.id}">Tandai cuan</button><button data-a="rej" data-id="${e.id}">Tolak</button><button class="d" data-a="del" data-id="${e.id}">Hapus</button></div>`
+ :`<textarea data-a="les" data-id="${e.id}" placeholder="Pelajaran dari eksperimen ini">${esc(e.lesson)}</textarea><div class="a"><button data-a="re" data-id="${e.id}">Uji lagi</button><button class="d" data-a="del" data-id="${e.id}">Hapus</button></div>`}</article>`
+}
+function viewExp(){
+ if(!S.exps.length)return'<div class="empty">Belum ada eksperimen. Pilih "Uji yang ini" di laporan hari ini.</div>';
+ const a=S.exps.filter(e=>e.status==='Uji'),d=S.exps.filter(e=>e.status!=='Uji');
+ return(a.length?a.map(expCard).join(''):'<div class="empty">Tidak ada eksperimen aktif.</div>')+(d.length?'<h2>Selesai</h2>'+d.map(expCard).join(''):'')
 }
 function render(){
- const q=$('s').value.toLowerCase();
- const cnt=s=>items.filter(o=>s==='Semua'||o.status===s).length;
- $('chips').innerHTML=['Semua',...ST].map(s=>`<button class="chip ${s===filter?'on':''}" data-a="flt" data-s="${s}">${s} ${cnt(s)}</button>`).join('');
- const act=items.filter(o=>o.status!=='Ditolak');
- $('sum').textContent=items.length?`${items.length} peluang, ${act.filter(o=>prio(score(o))==='A').length} prioritas A, ${cnt('Uji')} sedang diuji, ${cnt('Cuan')} menghasilkan`:'Mulai dengan satu ide.';
- const last=+localStorage.getItem(EX)||0;
- $('bk').innerHTML=items.length&&Date.now()-last>6048e5?`<div class="bar"><span>${last?'Sudah lebih dari 7 hari':'Belum pernah'} ekspor cadangan.</span><button class="p" data-a="exp">Ekspor</button></div>`:'';
- const list=items.filter(o=>(filter==='Semua'||o.status===filter)&&(!q||(o.title+o.problem+o.offer).toLowerCase().includes(q))).sort((a,b)=>score(b)-score(a)||b.created-a.created);
- $('L').innerHTML=list.length?list.map(card).join(''):`<div class="empty">${items.length?'Tidak ada yang cocok.':'Belum ada peluang. Ketik ide pertama di atas.'}</div>`;
+ document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.t===tab));
+ const a=S.exps.filter(e=>e.status==='Uji').length,w=S.exps.filter(e=>e.status==='Cuan').length;
+ $('sum').textContent=`${a} eksperimen aktif, ${w} menghasilkan`;
+ const keep=$('paste')?$('paste').value:'';
+ $('V').innerHTML=tab==='today'?viewToday():viewExp();
+ if(keep&&$('paste'))$('paste').value=keep
 }
-function addIdea(){const t=$('q').value.trim();if(!t)return;items.unshift(norm({title:t,created:Date.now()}));$('q').value='';filter='Semua';save();toast('Ide ditambahkan. Tap Detail untuk menilai.')}
-$('addBtn').onclick=addIdea;$('q').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addIdea()}});
-$('s').addEventListener('input',render);
-function prompt_(o){return`Saya menimbang peluang bisnis ini di Indonesia. Tolong analisis kritis dan jujur.
-
-Ide: ${o.title}
-Masalah pelanggan: ${o.problem||'(belum diisi)'}
-Yang dijual: ${o.offer||'(belum diisi)'}
-Harga jual: ${o.price?rp(o.price):'?'}, biaya per unit: ${o.unit?rp(o.unit):'?'}, modal awal: ${o.cap?rp(o.cap):'?'}
-Skor awal saya: ${score(o)}/100
-
-Jawab ringkas: 1) apakah permintaannya nyata, apa buktinya; 2) siapa pesaing utama dan harganya; 3) unit economics dan risiko terbesar; 4) tiga tes termurah yang bisa saya lakukan dalam 7 hari; 5) saran: lanjut, ubah, atau tolak.`}
-function copy(t){return navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()}
+async function search(){
+ const c=cfg(),p=makePrompt();
+ if(!c.ep){copy(p,'Prompt disalin. Tempel di Claude, lalu salin jawabannya ke sini.');window.open('https://claude.ai/new','_blank','noopener');return}
+ busy=true;render();
+ try{const r=await fetch(c.ep,{method:'POST',headers:{'content-type':'application/json','x-radar-key':c.sk||''},body:JSON.stringify({prompt:p})});
+  if(!r.ok)throw new Error('kode '+r.status);const d=await r.json();
+  S.reports.unshift(parseReport(d.text||''));S.reports=S.reports.slice(0,14);toast('Laporan baru masuk.')}
+ catch(e){alert('Pencarian otomatis gagal ('+e.message+'). Periksa URL dan kunci di Pengaturan, atau pakai mode manual.')}
+ busy=false;save()
+}
+function setSt(id,fn){const e=S.exps.find(x=>x.id===id);if(e){fn(e);save()}}
 document.addEventListener('click',e=>{
- const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,o=items.find(x=>x.id===b.dataset.id);
- if(a==='flt'){filter=b.dataset.s;render()}
- else if(a==='tog'&&o){open.has(o.id)?open.delete(o.id):open.add(o.id);render()}
- else if(a==='adv'&&o){o.status=ST[ST.indexOf(o.status)+1];save()}
- else if(a==='del'&&o){if(confirm('Hapus "'+o.title+'"?')){items=items.filter(x=>x!==o);save()}}
- else if(a==='web')window.open(b.dataset.u,'_blank','noopener');
- else if(a==='ai'&&o){const t=prompt_(o);copy(t).then(()=>{toast('Prompt disalin. Tempel di Claude.');window.open('https://claude.ai/new','_blank','noopener')}).catch(()=>{prompt('Salin prompt ini:',t)})}
+ const b=e.target.closest('button[data-a]');if(!b)return;const a=b.dataset.a,id=b.dataset.id;
+ const o=S.reports.flatMap(r=>r.items).find(x=>x.id===id),ex=S.exps.find(x=>x.id===id);
+ if(a==='tab'){tab=b.dataset.t;render()}
+ else if(a==='srch')search();
+ else if(a==='cfg'){const ep=$('ep').value.trim();if(ep&&!url(ep)){alert('URL harus diawali https://');return}try{localStorage.setItem(CK,JSON.stringify({ep,sk:$('sk').value.trim()}))}catch(x){}toast('Pengaturan disimpan.');render()}
+ else if(a==='imr'){try{const r=parseReport($('paste').value);S.reports.unshift(r);S.reports=S.reports.slice(0,14);$('paste').value='';save();toast('Laporan diimpor.')}catch(x){alert('Teks tidak terbaca sebagai laporan. Pastikan yang ditempel adalah JSON dari Claude.')}}
+ else if(a==='try'&&o){o.state='diuji';S.exps.unshift(normE({id:uid(),title:o.title,buyer:o.buyer,offer:o.offer,first:o.first,status:'Uji',log:[]}));tab='exp';save();toast('Eksperimen dimulai.')}
+ else if(a==='skip'&&o){o.state='diabaikan';save()}
+ else if(a==='cpo'&&o)copy(o.offer,'Penawaran disalin.');
+ else if(a==='log'&&ex){const box=document.querySelector('[data-box="'+id+'"]'),v=k=>num(box.querySelector('[data-k="'+k+'"]').value);const l={d:new Date().toISOString().slice(0,10),c:v('c'),r:v('r'),b:v('b'),rev:v('rev'),cost:v('cost')};if(!(l.c||l.r||l.b||l.rev||l.cost)){toast('Isi minimal satu angka.');return}ex.log.push(l);save();toast('Tercatat.')}
+ else if(a==='cpe'&&ex)copy(evalPrompt(ex),'Prompt evaluasi disalin. Tempel di Claude.');
+ else if(a==='win')setSt(id,x=>x.status='Cuan');
+ else if(a==='rej')setSt(id,x=>x.status='Ditolak');
+ else if(a==='re')setSt(id,x=>x.status='Uji');
+ else if(a==='del'&&ex){if(confirm('Hapus "'+ex.title+'"?')){S.exps=S.exps.filter(x=>x!==ex);save()}}
  else if(a==='exp')exportData();
+ else if(a==='imp')$('file').click();
 });
-document.addEventListener('change',e=>{
- const t=e.target,f=t.dataset.f;if(!f)return;const o=items.find(x=>x.id===t.dataset.id);if(!o)return;
- if(f==='crit')o.crit[+t.dataset.i]=Math.min(5,Math.max(1,+t.value));
- else if(['price','unit','cap'].includes(f))o[f]=Math.max(0,+t.value||0);
- else if(f==='url'){o.url=url(t.value);if(t.value&&!o.url)alert('Tautan harus diawali http:// atau https://')}
- else if(f==='status'){if(ST.includes(t.value))o.status=t.value}
- else o[f]=t.value.trim();
- save();
-});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset.a==='les'){const x=S.exps.find(y=>y.id===t.dataset.id);if(x){x.lesson=t.value.trim();save()}}});
 function exportData(){
- const u=URL.createObjectURL(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),opportunities:items},null,2)],{type:'application/json'}));
- const a=document.createElement('a');a.href=u;a.download='radar-cadangan-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();
- setTimeout(()=>URL.revokeObjectURL(u),4000);try{localStorage.setItem(EX,Date.now())}catch(e){}render();toast('Cadangan diunduh.')
+ const u=URL.createObjectURL(new Blob([JSON.stringify({exportedAt:new Date().toISOString(),...S},null,2)],{type:'application/json'}));
+ const a=document.createElement('a');a.href=u;a.download='radar-cadangan-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);toast('Cadangan diunduh.')
 }
-$('exp').onclick=exportData;$('imp').onclick=()=>$('file').click();
-$('file').onchange=ev=>{const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result),arr=clean(Array.isArray(d)?d:d.opportunities);if(!arr.length)throw 0;const ids=new Set(items.map(x=>x.id)),add=arr.filter(x=>!ids.has(x.id));items=[...add,...items];save();toast(add.length+' peluang diimpor.')}catch(e){alert('File JSON tidak valid.')}ev.target.value=''};r.readAsText(f)};
+$('file').onchange=ev=>{const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.reports)&&!Array.isArray(d.exps))throw 0;
+ const reps=(d.reports||[]).map(x=>({date:String(x.date||''),items:(x.items||[]).map(normO).filter(Boolean)})).filter(x=>x.items.length),exps=(d.exps||[]).map(normE).filter(Boolean);
+ const ids=new Set(S.exps.map(x=>x.id));S.reports=[...reps,...S.reports].slice(0,14);S.exps=[...exps.filter(x=>!ids.has(x.id)),...S.exps];save();toast('Data diimpor.')}catch(e){alert('File cadangan tidak valid.')}ev.target.value=''};r.readAsText(f)};
 render();
 </script>
 </body>
