@@ -2,160 +2,134 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#101827">
-<title>YOKI AI — USA Business Radar</title>
+<title>YOKI MONEY FINDER — Personal Money Hunter</title>
+<meta name="description" content="Personal opportunity intelligence: temukan, nilai, simpan, dan eksekusi peluang penghasilan.">
 <style>
-:root{--bg:#0b1120;--panel:#121c2e;--panel2:#172338;--line:#26344c;--text:#edf3ff;--muted:#9baac3;--mint:#73e0c0;--blue:#8fb8ff;--gold:#f5c76b;--red:#ff8e8e}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top right,#162847 0%,#0b1120 48%);color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-.wrap{max-width:1180px;margin:auto;padding:24px 18px 56px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:22px}
-.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,#8af0cf,#5e9dff);display:grid;place-items:center;color:#0b1724;font-weight:900;font-size:18px;box-shadow:0 8px 28px #5e9dff25}
-h1{font-size:clamp(22px,4vw,32px);margin:0;letter-spacing:-.8px}.sub{color:var(--muted);font-size:13px;margin-top:2px}.badge{border:1px solid #2b665a;color:var(--mint);background:#10332e;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:700}
-.hero{padding:26px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(115deg,#16263b,#111b2c 60%,#142a31);margin-bottom:18px;position:relative;overflow:hidden}
-.hero:after{content:"$";position:absolute;right:28px;top:-38px;font-size:190px;font-weight:900;color:#a0ffe90a;pointer-events:none}
-.eyebrow{color:var(--mint);text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:800}.hero h2{font-size:clamp(24px,4vw,38px);line-height:1.12;max-width:690px;margin:10px 0}.hero p{max-width:700px;color:#b5c3d9;margin:0 0 18px}
-.actions{display:flex;gap:9px;flex-wrap:wrap}.btn{border:1px solid #34445f;background:#1b2940;color:var(--text);border-radius:12px;padding:10px 13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:13px}.btn.primary{background:var(--mint);border-color:var(--mint);color:#09201b}.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
-.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:15px}.card{background:linear-gradient(180deg,#131e31,#101929);border:1px solid var(--line);border-radius:19px;padding:18px;min-width:0}.span8{grid-column:span 8}.span4{grid-column:span 4}.span6{grid-column:span 6}.span12{grid-column:span 12}
-.cardhead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:13px}.card h3{font-size:16px;margin:0}.hint{color:var(--muted);font-size:12px;margin-top:4px}
-.statrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{padding:14px;border:1px solid var(--line);background:#0e1727;border-radius:14px}.stat strong{display:block;font-size:25px;letter-spacing:-.5px}.stat span{font-size:11px;color:var(--muted)}
-.searchlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.searchbtn{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:4px;border:1px solid #2a3a54;border-radius:13px;padding:12px;background:#101a2b;color:var(--text);cursor:pointer}.searchbtn strong{font-size:13px}.searchbtn small{font-size:11px;color:var(--muted)}
-.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}label{font-size:12px;color:#b6c5dc}input,select,textarea{width:100%;background:#0b1423;border:1px solid #2b3a53;border-radius:10px;padding:10px 11px;color:var(--text);font:inherit;font-size:13px;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--mint)}textarea{min-height:78px;resize:vertical}
-.pill{display:inline-block;border-radius:999px;padding:4px 8px;font-size:10px;font-weight:800;letter-spacing:.3px}.p-high{background:#12382f;color:var(--mint)}.p-mid{background:#3b2f17;color:var(--gold)}.p-low{background:#38212a;color:var(--red)}
-.opplist{display:grid;gap:10px}.opp{border:1px solid var(--line);background:#0f1929;border-radius:14px;padding:13px}.opp-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.opp h4{margin:0 0 4px;font-size:14px}.opp p{margin:6px 0;color:#afbdd2;font-size:12px}.opp-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.tag{font-size:10px;color:#bac8dc;background:#1b2940;border-radius:7px;padding:4px 7px}.opp-actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}.mini{border:1px solid #34445f;background:#18253a;color:#dce7f8;border-radius:8px;padding:6px 8px;font-size:11px;cursor:pointer}
-.empty{padding:22px;text-align:center;color:var(--muted);border:1px dashed #30405a;border-radius:13px;font-size:13px}
-.scorebox{display:flex;align-items:center;gap:14px;margin:12px 0;padding:13px;border:1px solid var(--line);background:#0e1727;border-radius:13px}.score{font-size:30px;font-weight:900;color:var(--mint);min-width:60px}.scorebox p{margin:0;color:var(--muted);font-size:12px}
-.foot{margin-top:18px;color:#7f91ad;font-size:11px;text-align:center}.notice{border-left:3px solid var(--gold);padding:10px 12px;background:#2b2418;color:#e5d3a9;border-radius:0 10px 10px 0;font-size:12px;margin-top:12px}
-hr{border:0;border-top:1px solid var(--line);margin:15px 0}
-@media(max-width:760px){.span8,.span4,.span6{grid-column:span 12}.hero{padding:20px}.statrow{grid-template-columns:1fr 1fr 1fr}.stat{padding:10px}.stat strong{font-size:21px}.searchlist{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.wrap{padding:16px 12px 40px}}
+:root{--bg:#0a1220;--panel:#111d2e;--panel2:#17263a;--line:#293b52;--text:#eef5ff;--muted:#9aadc4;--mint:#8be0b1;--blue:#8bc8ff;--gold:#ffd27d;--red:#ff9c9c}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 88% 0%,#1c3b51 0,transparent 30%),var(--bg);color:var(--text);font:14px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:1180px;margin:auto;padding:20px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.brand{display:flex;gap:11px;align-items:center}.logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--mint),var(--blue));color:#0b1725;font-weight:950;font-size:22px}
+.eyebrow{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--mint);font-weight:850}.brand h1{font-size:clamp(19px,4vw,27px);margin:0}.sub,.muted{color:var(--muted);font-size:12px}
+.status{border:1px solid #315844;color:var(--mint);background:#142c26;padding:7px 11px;border-radius:999px;font-size:11px;font-weight:800}
+.hero{background:linear-gradient(120deg,#1a354b,#142237 72%);border:1px solid #2c4a60;border-radius:20px;padding:23px;margin-bottom:14px}
+.hero h2{font-size:clamp(25px,5vw,38px);line-height:1.15;margin:7px 0 9px;max-width:850px}.hero p{color:#c0cede;max-width:790px;margin:0}
+.nav{display:flex;gap:7px;overflow:auto;padding:2px 0 12px}.nav button{white-space:nowrap;background:#17263a;color:var(--muted);border:1px solid var(--line)}.nav button.active{background:var(--mint);color:#10251b;border-color:var(--mint)}
+button,.btn{border:0;border-radius:10px;padding:10px 13px;font:750 12px system-ui;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none}
+.primary{background:var(--mint);color:#0c2018}.secondary{background:#263950;color:var(--text);border:1px solid #405570}.ghost{background:transparent;color:var(--blue);border:1px solid #39516c}
+input,select,textarea{width:100%;background:#0b1625;color:var(--text);border:1px solid #344a63;border-radius:10px;padding:11px;font:inherit;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--blue)}textarea{min-height:74px;resize:vertical}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}.stat,.card,.opp{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:15px}.stat span{display:block;color:var(--muted);font-size:11px}.stat b{display:block;font-size:24px;margin-top:3px}.stat small{color:var(--mint);font-size:10px}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:19px 0 10px}.sectionhead h3{margin:0;font-size:18px}.sectionhead p{margin:3px 0 0;color:var(--muted);font-size:11px}
+.panelgrid{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}.searchgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.searchitem{background:#0e1a2a;border:1px solid var(--line);border-radius:12px;padding:12px}.searchitem b{display:block;font-size:13px}.searchitem span{display:block;color:var(--muted);font-size:11px;margin:3px 0 9px}
+.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.field label{display:block;color:var(--muted);font-size:11px;margin:0 0 4px}.field.full{grid-column:1/-1}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.opp h4{margin:7px 0 4px;font-size:15px}.opp p{color:#c1cede;font-size:12px;margin:4px 0}.tag{display:inline-block;color:var(--mint);background:#142d28;border:1px solid #315844;border-radius:999px;padding:4px 8px;font-size:10px;font-weight:800}
+.score{font-size:22px;font-weight:900;color:var(--mint)}.meta{color:var(--muted);font-size:10px;margin:8px 0}.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.notice{border-left:3px solid var(--gold);background:#28251b;color:#e8dcbf;padding:11px 13px;border-radius:0 10px 10px 0;font-size:11px;margin:12px 0}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.hidden{display:none!important}.empty{padding:20px;text-align:center;color:var(--muted);border:1px dashed #40516a;border-radius:12px;grid-column:1/-1}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:9px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:700}
+.footer{text-align:center;color:#71849d;font-size:10px;margin:22px 0 5px}
+@media(max-width:780px){.grid{grid-template-columns:repeat(2,1fr)}.panelgrid{grid-template-columns:1fr}}
+@media(max-width:520px){.wrap{padding:12px}.hero{padding:18px}.cards,.searchgrid,.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.sectionhead{align-items:start;flex-direction:column}.row{flex-direction:column}.row>*{width:100%}}
 </style>
 </head>
-<body>
-<div class="wrap">
-  <header class="top">
-    <div class="brand"><div class="logo">Y</div><div><h1>YOKI AI <span style="color:var(--mint)">Radar</span></h1><div class="sub">USA Business Opportunities · Operasi dari Yogyakarta</div></div></div>
-    <div class="badge">● MVP · RADAR V1</div>
-  </header>
-
-  <section class="hero">
-    <div class="eyebrow">Target market: United States</div>
-    <h2>Temukan peluang bisnis Amerika.<br>Eksekusi dari Jogja.</h2>
-    <p>Radar untuk menyaring masalah pasar, menemukan calon pelanggan, dan menguji peluang sebelum mengeluarkan modal. Fokus: jasa jarak jauh, riset, sourcing Indonesia, produk digital, dan layanan lokal.</p>
-    <div class="actions">
-      <button class="btn primary" onclick="runSearchPack()">↗ Jalankan pencarian web</button>
-      <button class="btn" onclick="document.getElementById('addForm').scrollIntoView({behavior:'smooth'})">＋ Catat peluang</button>
-      <button class="btn" onclick="exportData()">⇩ Ekspor data</button>
-    </div>
-  </section>
-
-  <div class="grid">
-    <section class="card span8">
-      <div class="cardhead"><div><h3>Radar pencarian pasar</h3><div class="hint">Klik topik untuk membuka pencarian terbaru di web. Hasil perlu diverifikasi.</div></div><span class="pill p-high">LIVE SEARCH</span></div>
-      <div class="searchlist">
-        <button class="searchbtn" onclick="searchWeb('US small business owners problems need help services 2026')"><strong>01 · Masalah bisnis kecil</strong><small>Keluhan, pekerjaan yang belum tertangani</small></button>
-        <button class="searchbtn" onclick="searchWeb('United States small business outsourcing demand virtual assistant market 2026')"><strong>02 · Jasa remote</strong><small>Permintaan outsourcing dan bantuan online</small></button>
-        <button class="searchbtn" onclick="searchWeb('USA importers looking for Indonesian suppliers handicrafts home decor 2026')"><strong>03 · Buyer & sourcing</strong><small>Pembeli Amerika yang mencari pemasok Indonesia</small></button>
-        <button class="searchbtn" onclick="searchWeb('site:reddit.com small business wish there was service problem business owners')"><strong>04 · Celah dari komunitas</strong><small>Diskusi dan keluhan calon pelanggan</small></button>
-        <button class="searchbtn" onclick="searchWeb('US ecommerce seller product research service demand niche products 2026')"><strong>05 · E-commerce</strong><small>Kebutuhan seller dan riset produk</small></button>
-        <button class="searchbtn" onclick="searchWeb('USA digital products templates underserved niche market trends 2026')"><strong>06 · Produk digital</strong><small>Template, panduan, aset digital</small></button>
-        <button class="searchbtn" onclick="searchWeb('US businesses hiring freelance market research competitor research remote 2026')"><strong>07 · Riset pasar</strong><small>Jasa riset pesaing dan pasar</small></button>
-        <button class="searchbtn" onclick="searchWeb('US customers buying products from Indonesia international shipping pain points')"><strong>08 · Produk Indonesia</strong><small>Kesulitan pembelian dan pengiriman</small></button>
-      </div>
-      <div class="notice">Catatan transparansi: dashboard HTML ini membuka pencarian web saat tombol diklik. Ini belum melakukan crawling otomatis di latar belakang. Otomatisasi terjadwal memerlukan backend/layanan otomasi dan sumber data yang sesuai.</div>
-    </section>
-
-    <section class="card span4">
-      <div class="cardhead"><div><h3>Opportunity pipeline</h3><div class="hint">Data tersimpan di browser/perangkat ini</div></div></div>
-      <div class="statrow">
-        <div class="stat"><strong id="totalCount">0</strong><span>Total peluang</span></div>
-        <div class="stat"><strong id="highCount">0</strong><span>Skor ≥ 75</span></div>
-        <div class="stat"><strong id="todoCount">0</strong><span>Belum diuji</span></div>
-      </div>
-      <hr>
-      <div class="hint">Prioritas strategi</div>
-      <div style="display:grid;gap:8px;margin-top:9px">
-        <div><span class="pill p-high">A · QUICK CASH</span> <span style="font-size:12px">Cari klien pertama</span></div>
-        <div><span class="pill p-mid">B · RECURRING</span> <span style="font-size:12px">Pendapatan berulang</span></div>
-        <div><span class="pill p-low">C · HIDDEN</span> <span style="font-size:12px">Celah yang belum ramai</span></div>
-      </div>
-    </section>
-
-    <section class="card span6" id="addForm">
-      <div class="cardhead"><div><h3>Catat peluang baru</h3><div class="hint">Masukkan temuan dari sumber web, komunitas, atau calon pelanggan.</div></div></div>
-      <form id="oppForm" class="formgrid">
-        <div class="field full"><label for="title">Nama peluang *</label><input id="title" required placeholder="Contoh: Riset pemasok untuk toko dekorasi AS"></div>
-        <div class="field"><label for="type">Kategori</label><select id="type"><option>Remote service</option><option>Indonesia sourcing</option><option>Market research</option><option>Digital product</option><option>Local buying & shipping</option><option>Other</option></select></div>
-        <div class="field"><label for="track">Jalur</label><select id="track"><option>Quick Cash</option><option>Recurring Income</option><option>Hidden Opportunity</option></select></div>
-        <div class="field"><label for="demand">Bukti permintaan (1–5)</label><input id="demand" type="number" min="1" max="5" value="3"></div>
-        <div class="field"><label for="competition">Ruang dari pesaing (1–5)</label><input id="competition" type="number" min="1" max="5" value="3"></div>
-        <div class="field"><label for="ease">Mudah dikerjakan dari Jogja (1–5)</label><input id="ease" type="number" min="1" max="5" value="4"></div>
-        <div class="field"><label for="margin">Potensi margin (1–5)</label><input id="margin" type="number" min="1" max="5" value="3"></div>
-        <div class="field full"><label for="source">Sumber / URL</label><input id="source" type="text" placeholder="Tempel tautan sumber atau nama komunitas"></div>
-        <div class="field full"><label for="next">Langkah validasi berikutnya</label><textarea id="next" placeholder="Contoh: hubungi 5 calon buyer, tanyakan kebutuhan dan budget"></textarea></div>
-        <div class="field full"><button class="btn primary" type="submit">＋ Simpan & nilai peluang</button></div>
-      </form>
-    </section>
-
-    <section class="card span6">
-      <div class="cardhead"><div><h3>Daftar peluang</h3><div class="hint">Mulai dari temuan yang punya bukti, bukan sekadar ide.</div></div><button class="mini" onclick="clearData()">Hapus semua</button></div>
-      <div id="oppList" class="opplist"><div class="empty">Belum ada peluang tersimpan.<br>Jalankan pencarian web, lalu catat temuan yang menjanjikan.</div></div>
-    </section>
-
-    <section class="card span12">
-      <div class="cardhead"><div><h3>Standar keputusan YOKI AI</h3><div class="hint">Gunakan standar ini sebelum menghabiskan waktu atau uang.</div></div></div>
-      <div class="grid">
-        <div class="span6"><div class="scorebox"><div class="score">01</div><p><b style="color:var(--text)">Bukti masalah</b><br>Ada keluhan, permintaan, lowongan, atau diskusi nyata dari target pasar.</p></div></div>
-        <div class="span6"><div class="scorebox"><div class="score">02</div><p><b style="color:var(--text)">Akses ke pembeli</b><br>Kita bisa menemukan dan menghubungi calon pelanggan secara wajar dan sah.</p></div></div>
-        <div class="span6"><div class="scorebox"><div class="score">03</div><p><b style="color:var(--text)">Keunggulan dari Jogja</b><br>Biaya, akses pemasok, pengetahuan lokal, atau eksekusi memberi nilai nyata.</p></div></div>
-        <div class="span6"><div class="scorebox"><div class="score">04</div><p><b style="color:var(--text)">Tes murah</b><br>Validasi dengan percakapan atau proyek kecil sebelum membeli stok atau memasang iklan.</p></div></div>
-      </div>
-    </section>
-  </div>
-  <div class="foot">YOKI AI USA Business Radar · Prototype lokal · Tidak menjamin pendapatan · Verifikasi data, biaya, dan aturan ekspor/impor sebelum transaksi.</div>
+<body><main class="wrap">
+<header class="top"><div class="brand"><div class="logo">Y</div><div><div class="eyebrow">Personal Opportunity Intelligence</div><h1>YOKI MONEY FINDER</h1><div class="sub">Your Personal AI Money Hunter · Free-first edition</div></div></div><div class="status">● ENGINE FOUNDATION · V2</div></header>
+<section class="hero"><div class="eyebrow">Find evidence. Score opportunity. Take action.</div><h2>Jangan menebak peluang uang.<br><span style="color:var(--mint)">Cari buktinya, lalu eksekusi.</span></h2><p>Dashboard pribadi untuk memburu peluang penghasilan dari Indonesia dan pasar global. Mulai dari riset web, catat bukti, nilai kelayakan, lalu ubah peluang terbaik menjadi rencana tindakan.</p></section>
+<nav class="nav">
+<button class="active" data-tab="home">Dashboard</button><button data-tab="scan">Opportunity Hunter</button><button data-tab="tracker">Opportunity Tracker</button><button data-tab="plan">Action Planner</button>
+</nav>
+<section id="home" class="tab">
+<div class="grid">
+<div class="stat"><span>Peluang tersimpan</span><b id="total">0</b><small>database di perangkat ini</small></div>
+<div class="stat"><span>Skor tinggi (≥75)</span><b id="high">0</b><small>prioritas validasi</small></div>
+<div class="stat"><span>Belum dieksekusi</span><b id="todo">0</b><small>butuh langkah berikutnya</small></div>
+<div class="stat"><span>Modal nol/rendah</span><b id="lean">0</b><small>sesuai filter modal</small></div>
 </div>
+<div class="panelgrid">
+<div class="card"><div class="eyebrow">Daily mission</div><h3 style="margin:5px 0">Misi pencarian hari ini</h3><p class="muted">Cari kebutuhan nyata, bukan sekadar tren. Buka beberapa pencarian terarah, periksa tanggal dan sumber, lalu simpan peluang yang punya bukti.</p><div class="actions"><button class="primary" onclick="go('scan')">Mulai berburu peluang ↗</button><button class="secondary" onclick="exportData()">Ekspor database ↓</button></div></div>
+<div class="card"><div class="eyebrow">Decision rule</div><h3 style="margin:5px 0">Sebelum mengejar peluang</h3><ol class="muted" style="padding-left:18px"><li>Ada bukti permintaan nyata.</li><li>Kita bisa menjangkau pembeli.</li><li>Bisa diuji tanpa mengeluarkan banyak uang.</li><li>Jelas bagaimana uang masuk.</li></ol></div>
+</div>
+<div class="sectionhead"><div><div class="eyebrow">Top opportunities</div><h3>Peluang dengan skor tertinggi</h3></div></div>
+<div id="topList" class="cards"><div class="empty">Belum ada peluang tersimpan. Mulai dari Opportunity Hunter.</div></div>
+</section>
+<section id="scan" class="tab hidden">
+<div class="sectionhead"><div><div class="eyebrow">Research console</div><h3>Opportunity Hunter</h3><p>Pencarian membuka hasil web eksternal. Periksa sumber asli sebelum menyimpan temuan.</p></div></div>
+<div class="card">
+<div class="formgrid">
+<div class="field"><label>Target pasar</label><select id="market"><option>Indonesia</option><option>Global</option><option>Amerika Serikat</option><option>Asia Tenggara</option><option>Yogyakarta</option></select></div>
+<div class="field"><label>Fokus peluang</label><select id="focus"><option value="all">Semua kategori</option><option value="jobs">Kerja remote & freelance</option><option value="problems">Masalah & kebutuhan pasar</option><option value="digital">Produk digital & AI</option><option value="arbitrage">Arbitrase & sourcing</option><option value="business">Usaha modal rendah</option></select></div>
+<div class="field full"><label>Kata kunci tambahan (opsional)</label><input id="extra" placeholder="Contoh: no-code, small business, creator tools..."></div>
+</div>
+<div class="actions"><button class="primary" onclick="runPack()">Jalankan paket pencarian ↗</button><button class="secondary" onclick="customSearch()">Cari kata kunci sendiri ↗</button></div>
+</div>
+<div class="sectionhead"><div><div class="eyebrow">Research routes</div><h3>Sumber pencarian terarah</h3></div></div>
+<div class="searchgrid" id="routes"></div>
+<div class="notice"><b>Status kejujuran sistem:</b> V2 ini belum menjalankan AI otonom atau mengambil hasil Google langsung ke database. Tombol pencarian membuka web untuk riset berbukti. AI API, pengambilan data otomatis, penjadwalan, dan notifikasi akan menjadi integrasi tahap berikutnya setelah fondasi ini siap.</div>
+</section>
+<section id="tracker" class="tab hidden">
+<div class="sectionhead"><div><div class="eyebrow">Your opportunity database</div><h3>Opportunity Tracker</h3><p>Data disimpan di browser/perangkat ini. Ekspor JSON secara berkala agar tidak hilang saat data browser dibersihkan.</p></div><div class="row" style="max-width:330px"><button class="secondary" onclick="exportData()">Ekspor ↓</button><button class="secondary" onclick="document.getElementById('importFile').click()">Impor ↑</button><input id="importFile" type="file" accept="application/json" class="hidden" onchange="importData(event)"></div></div>
+<div class="panelgrid">
+<div class="card"><h3 style="margin-top:0">Catat peluang baru</h3>
+<div class="formgrid">
+<div class="field full"><label>Nama peluang *</label><input id="name" placeholder="Contoh: jasa riset produk untuk seller kecil"></div>
+<div class="field"><label>Kategori</label><select id="category"><option>Remote / Freelance</option><option>Digital Product / AI</option><option>Business Opportunity</option><option>Market Arbitrage</option><option>Affiliate</option><option>Employment</option><option>Other</option></select></div>
+<div class="field"><label>Target pasar</label><input id="target" placeholder="Indonesia / US / Global"></div>
+<div class="field"><label>Bukti permintaan (1–5)</label><select id="demand"><option value="1">1 - Lemah</option><option value="2">2</option><option value="3" selected>3 - Sedang</option><option value="4">4</option><option value="5">5 - Kuat</option></select></div>
+<div class="field"><label>Kemudahan mulai (1–5)</label><select id="ease"><option value="1">1 - Sulit</option><option value="2">2</option><option value="3" selected>3 - Sedang</option><option value="4">4</option><option value="5">5 - Mudah</option></select></div>
+<div class="field"><label>Potensi margin (1–5)</label><select id="margin"><option value="1">1 - Rendah</option><option value="2">2</option><option value="3" selected>3 - Sedang</option><option value="4">4</option><option value="5">5 - Tinggi</option></select></div>
+<div class="field"><label>Kecepatan pendapatan (1–5)</label><select id="speed"><option value="1">1 - Lama</option><option value="2">2</option><option value="3" selected>3 - Sedang</option><option value="4">4</option><option value="5">5 - Cepat</option></select></div>
+<div class="field"><label>Modal awal</label><select id="cost"><option value="0">Rp0 / tanpa modal</option><option value="1">Sangat rendah</option><option value="2">Rendah</option><option value="3">Menengah</option><option value="4">Tinggi</option></select></div>
+<div class="field"><label>Persaingan (1 rendah – 5 tinggi)</label><select id="competition"><option value="1">1 - Rendah</option><option value="2">2</option><option value="3" selected>3 - Sedang</option><option value="4">4</option><option value="5">5 - Tinggi</option></select></div>
+<div class="field full"><label>URL sumber bukti</label><input id="source" placeholder="https://..."></div>
+<div class="field full"><label>Catatan / bukti permintaan</label><textarea id="evidence" placeholder="Siapa yang membutuhkan? Bukti apa yang ditemukan? Tanggal/sumber?"></textarea></div>
+</div><div class="actions"><button class="primary" onclick="addOpp()">Simpan peluang</button><button class="secondary" onclick="clearForm()">Kosongkan</button></div>
+</div>
+<div class="card"><h3 style="margin-top:0">Cara membaca skor</h3><p class="muted">Skor 0–100 adalah alat bantu prioritas, bukan jaminan keuntungan.</p><p><b style="color:var(--mint)">Demand 30%</b><br><span class="muted">Bukti orang benar-benar membutuhkan.</span></p><p><b style="color:var(--blue)">Ease 25% + Speed 20%</b><br><span class="muted">Seberapa realistis dan cepat mulai.</span></p><p><b style="color:var(--gold)">Margin 15% + kompetisi 10%</b><br><span class="muted">Potensi ekonomi dan tekanan pesaing.</span></p><p class="muted">Modal ditampilkan terpisah agar peluang tanpa modal mudah difilter. Validasi tetap wajib.</p></div>
+</div>
+<div class="sectionhead"><div><div class="eyebrow">Saved opportunities</div><h3>Daftar peluang</h3></div><div class="row" style="max-width:300px"><select id="sort" onchange="render()"><option value="score">Skor tertinggi</option><option value="new">Terbaru</option><option value="status">Status</option></select><select id="filter" onchange="render()"><option value="all">Semua status</option><option value="New">Baru</option><option value="Validating">Validasi</option><option value="Executing">Dikerjakan</option><option value="Done">Selesai</option><option value="Rejected">Ditolak</option></select></div></div>
+<div id="list" class="cards"><div class="empty">Belum ada data.</div></div>
+</section>
+<section id="plan" class="tab hidden">
+<div class="sectionhead"><div><div class="eyebrow">Execution desk</div><h3>Action Planner</h3><p>Pilih peluang tersimpan dan pecah menjadi langkah kecil yang bisa dilakukan.</p></div></div>
+<div class="card"><div class="field"><label>Pilih peluang</label><select id="planSelect" onchange="showPlan()"><option value="">Pilih peluang...</option></select></div><div id="planDetail" class="muted" style="margin-top:12px">Belum ada peluang dipilih.</div></div>
+<div class="notice">Prinsip eksekusi: jangan membeli stok, berlangganan tool, atau memasang iklan sebelum ada bukti minat dari calon pembeli. Mulai dari tes kecil yang bisa dilakukan gratis.</div>
+</section>
+<div class="footer">YOKI MONEY FINDER · V2 FOUNDATION · Personal use · No income guarantee</div>
+</main>
 <script>
-const KEY='yokiRadarOpportunitiesV1';
-let opportunities=[];
-try{opportunities=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){opportunities=[]}
-function searchWeb(q){window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank','noopener')}
-function runSearchPack(){
- const queries=[
- 'US small business owners problems need help services 2026',
- 'United States small business outsourcing demand virtual assistant market 2026',
- 'USA importers looking for Indonesian suppliers handicrafts home decor 2026',
- 'site:reddit.com small business wish there was service problem business owners',
- 'US businesses hiring freelance market research competitor research remote 2026'
- ];
- queries.forEach((q,i)=>setTimeout(()=>searchWeb(q),i*350));
-}
-function score(o){return Math.round(((+o.demand*0.30)+(+o.competition*0.20)+(+o.ease*0.25)+(+o.margin*0.25))/5*100)}
-function save(){localStorage.setItem(KEY,JSON.stringify(opportunities));render()}
-function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function render(){
- document.getElementById('totalCount').textContent=opportunities.length;
- document.getElementById('highCount').textContent=opportunities.filter(o=>score(o)>=75).length;
- document.getElementById('todoCount').textContent=opportunities.filter(o=>!o.status||o.status==='Belum diuji').length;
- const box=document.getElementById('oppList');
- if(!opportunities.length){box.innerHTML='<div class="empty">Belum ada peluang tersimpan.<br>Jalankan pencarian web, lalu catat temuan yang menjanjikan.</div>';return}
- box.innerHTML=opportunities.slice().reverse().map(o=>{
- const s=score(o),cls=s>=75?'p-high':s>=55?'p-mid':'p-low';
- const source=o.source?(/^(https?:\/\/)/i.test(o.source)?`<a href="${esc(o.source)}" target="_blank" rel="noopener" style="color:var(--blue)">Buka sumber ↗</a>`:esc(o.source)):'Sumber belum dicatat';
- return `<article class="opp"><div class="opp-top"><div><h4>${esc(o.title)}</h4><div class="hint">${esc(o.type)} · ${esc(o.track)}</div></div><span class="pill ${cls}">${s}/100</span></div><p><b>Validasi:</b> ${esc(o.next||'Tentukan langkah validasi berikutnya.')}</p><div class="opp-meta"><span class="tag">Permintaan ${o.demand}/5</span><span class="tag">Ruang pesaing ${o.competition}/5</span><span class="tag">Eksekusi ${o.ease}/5</span><span class="tag">Margin ${o.margin}/5</span><span class="tag">${esc(o.status||'Belum diuji')}</span></div><p style="margin-bottom:0">${source}</p><div class="opp-actions"><button class="mini" onclick="toggleStatus('${o.id}')">${o.status==='Sudah divalidasi'?'Tandai belum diuji':'Tandai tervalidasi'}</button><button class="mini" onclick="deleteOpp('${o.id}')">Hapus</button></div></article>`
- }).join('');
-}
-document.getElementById('oppForm').addEventListener('submit',e=>{
- e.preventDefault();
- const o={id:Date.now().toString(),title:document.getElementById('title').value.trim(),type:document.getElementById('type').value,track:document.getElementById('track').value,demand:clamp('demand'),competition:clamp('competition'),ease:clamp('ease'),margin:clamp('margin'),source:document.getElementById('source').value.trim(),next:document.getElementById('next').value.trim(),status:'Belum diuji',created:new Date().toISOString()};
- opportunities.push(o);save();e.target.reset();document.getElementById('demand').value=3;document.getElementById('competition').value=3;document.getElementById('ease').value=4;document.getElementById('margin').value=3;document.getElementById('oppList').scrollIntoView({behavior:'smooth'});
-});
-function clamp(id){let n=Number(document.getElementById(id).value)||3;return Math.max(1,Math.min(5,n))}
-function toggleStatus(id){opportunities=opportunities.map(o=>o.id===id?{...o,status:o.status==='Sudah divalidasi'?'Belum diuji':'Sudah divalidasi'}:o);save()}
-function deleteOpp(id){opportunities=opportunities.filter(o=>o.id!==id);save()}
-function clearData(){if(confirm('Hapus semua peluang yang tersimpan di browser ini?')){opportunities=[];save()}}
-function exportData(){
- const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),opportunities},null,2)],{type:'application/json'});
- const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='yoki-usa-business-radar.json';a.click();URL.revokeObjectURL(url)
-}
-render();
+const KEY='yokiMoneyFinderV2';
+let items=[];try{items=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){items=[]}
+const routeData=[
+['01 · Kebutuhan pasar','Keluhan dan pekerjaan yang belum terselesaikan','problems','"looking for" OR "need help" small business problem market demand'],
+['02 · Remote & freelance','Proyek dan pekerjaan yang bisa dikerjakan dari Indonesia','jobs','remote freelance jobs hiring contract work from anywhere'],
+['03 · AI & micro tools','Kebutuhan yang bisa diselesaikan dengan AI atau otomasi','digital','AI tools workflow automation underserved business needs'],
+['04 · Produk digital','Template, aset, panduan, dan produk creator economy','digital','digital product demand templates creator economy niche'],
+['05 · Arbitrase & sourcing','Perbedaan harga, pasokan, dan kebutuhan antar pasar','arbitrage','sourcing supplier buyer price gap products market opportunity'],
+['06 · Modal rendah','Model usaha jasa, pre-order, dan tanpa stok','business','low startup cost business opportunities customer demand']
+];
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function score(o){let d=+o.demand,e=+o.ease,m=+o.margin,s=+o.speed,c=+o.competition;return Math.round((d*30+e*25+m*15+s*20+(6-c)*10)/5)}
+function persist(){localStorage.setItem(KEY,JSON.stringify(items));render()}
+function go(id){document.querySelectorAll('.tab').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));if(id==='plan')fillPlan();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>go(b.dataset.tab)));
+function market(){return document.getElementById('market').value}
+function makeQuery(q){let m=market();let tail=m==='Global'?' worldwide':m==='Amerika Serikat'?' United States':m==='Asia Tenggara'?' Southeast Asia':m==='Yogyakarta'?' Yogyakarta Indonesia':' Indonesia';let x=document.getElementById('extra').value.trim();return q+tail+(x?' '+x:'')+' 2026'}
+function openSearch(q){window.open('https://www.google.com/search?q='+encodeURIComponent(q),'_blank','noopener')}
+function runPack(){let f=document.getElementById('focus').value;let chosen=routeData.filter(r=>f==='all'||r[2]===f);chosen.forEach((r,i)=>setTimeout(()=>openSearch(makeQuery(r[3])),i*500))}
+function customSearch(){let q=document.getElementById('extra').value.trim();if(!q){alert('Isi kata kunci tambahan dulu.');return}openSearch(makeQuery(q))}
+function drawRoutes(){document.getElementById('routes').innerHTML=routeData.map(r=>`<div class="searchitem"><b>${r[0]}</b><span>${r[1]}</span><button class="secondary" onclick="openSearch(makeQuery(${JSON.stringify(r[3])}))">Cari di web ↗</button></div>`).join('')}
+function addOpp(){let name=document.getElementById('name').value.trim();if(!name){alert('Nama peluang wajib diisi.');return}let o={id:Date.now(),name,category:document.getElementById('category').value,target:document.getElementById('target').value,demand:+document.getElementById('demand').value,ease:+document.getElementById('ease').value,margin:+document.getElementById('margin').value,speed:+document.getElementById('speed').value,cost:+document.getElementById('cost').value,competition:+document.getElementById('competition').value,source:document.getElementById('source').value,evidence:document.getElementById('evidence').value,status:'New',created:new Date().toISOString(),next:'Periksa bukti permintaan dan cari 3 calon pembeli.'};items.unshift(o);clearForm();persist();alert('Peluang tersimpan.');}
+function clearForm(){['name','target','source','evidence'].forEach(id=>document.getElementById(id).value='')}
+function removeOpp(id){if(confirm('Hapus peluang ini?')){items=items.filter(o=>o.id!==id);persist()}}
+function updateStatus(id,v){let o=items.find(x=>x.id===id);if(o){o.status=v;persist()}}
+function updateNext(id,v){let o=items.find(x=>x.id===id);if(o){o.next=v;persist()}}
+function card(o){return `<article class="opp"><div class="row"><span class="tag">${esc(o.category)}</span><span class="score">${score(o)}/100</span></div><h4>${esc(o.name)}</h4><p>${esc(o.evidence||'Belum ada catatan bukti.')}</p><div class="meta">${esc(o.target||'Target belum ditentukan')} · Modal: ${['Rp0','Sangat rendah','Rendah','Menengah','Tinggi'][o.cost]} · ${new Date(o.created).toLocaleDateString('id-ID')}</div><div class="field"><label>Status</label><select onchange="updateStatus(${o.id},this.value)">${['New','Validating','Executing','Done','Rejected'].map(s=>`<option ${o.status===s?'selected':''}>${s}</option>`).join('')}</select></div><div class="field" style="margin-top:7px"><label>Langkah berikutnya</label><input value="${esc(o.next||'')}" onchange="updateNext(${o.id},this.value)"></div><div class="actions">${o.source?`<button class="secondary" onclick="window.open(${JSON.stringify(o.source)},'_blank','noopener')">Buka bukti ↗</button>`:''}<button class="ghost" onclick="go('plan');document.getElementById('planSelect').value='${o.id}';showPlan()">Rencana aksi</button><button class="ghost" onclick="removeOpp(${o.id})">Hapus</button></div></article>`}
+function render(){document.getElementById('total').textContent=items.length;document.getElementById('high').textContent=items.filter(o=>score(o)>=75).length;document.getElementById('todo').textContent=items.filter(o=>!['Done','Rejected'].includes(o.status)).length;document.getElementById('lean').textContent=items.filter(o=>o.cost<=1).length;let top=[...items].sort((a,b)=>score(b)-score(a)).slice(0,4);document.getElementById('topList').innerHTML=top.length?top.map(card).join(''):'<div class="empty">Belum ada peluang tersimpan. Mulai dari Opportunity Hunter.</div>';let f=document.getElementById('filter')?.value||'all',s=document.getElementById('sort')?.value||'score';let arr=items.filter(o=>f==='all'||o.status===f);arr.sort((a,b)=>s==='new'?b.id-a.id:s==='status'?a.status.localeCompare(b.status):score(b)-score(a));document.getElementById('list').innerHTML=arr.length?arr.map(card).join(''):'<div class="empty">Belum ada peluang untuk filter ini.</div>';fillPlan()}
+function exportData(){let blob=new Blob([JSON.stringify(items,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='yoki-money-finder-backup.json';a.click();URL.revokeObjectURL(a.href)}
+function importData(e){let file=e.target.files[0];if(!file)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!Array.isArray(x))throw 0;items=x;persist();alert('Database berhasil diimpor.')}catch(_){alert('File JSON tidak valid.')}};r.readAsText(file);e.target.value=''}
+function fillPlan(){let el=document.getElementById('planSelect');if(!el)return;let old=el.value;el.innerHTML='<option value="">Pilih peluang...</option>'+items.map(o=>`<option value="${o.id}">${esc(o.name)}</option>`).join('');if(items.some(o=>String(o.id)===old))el.value=old}
+function showPlan(){let id=+document.getElementById('planSelect').value,o=items.find(x=>x.id===id),box=document.getElementById('planDetail');if(!o){box.textContent='Belum ada peluang dipilih.';return}let steps=['Validasi masalah: temukan minimal 3 bukti permintaan independen.','Identifikasi 5 calon pengguna/pembeli yang relevan.','Hubungi 3 calon pengguna dengan pertanyaan singkat, bukan langsung menjual.','Buat tes paling sederhana tanpa biaya besar (contoh, sampel, landing page, atau penawaran manual).','Catat respons, biaya, waktu, dan kesediaan membayar.','Putuskan: lanjutkan, ubah penawaran, atau hentikan.'];box.innerHTML=`<h3>${esc(o.name)}</h3><p class="muted">Skor ${score(o)}/100 · Status ${esc(o.status)} · Target ${esc(o.target||'belum ditentukan')}</p><ol>${steps.map(s=>`<li style="margin:8px 0">${s}</li>`).join('')}</ol><p><b>Langkah berikutnya:</b> ${esc(o.next||'Belum ditentukan')}</p>${o.source?`<p><a style="color:var(--blue)" href="${esc(o.source)}" target="_blank" rel="noopener">Buka sumber bukti ↗</a></p>`:''}`}
+drawRoutes();render();
 </script>
-</body>
-</html>
+</body></html>
